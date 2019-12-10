@@ -1,0 +1,120 @@
+
+    create table genero(
+    id serial,
+    genero text not null,
+    constraint genero_pk primary key (id)
+    );
+
+    create table video(
+    id serial,
+    capa text not null,
+    nome text not null,
+    duracao text not null,
+    lingua text not null,
+    sinopse text not null,
+    url text not null,
+    constraint video_pk primary key (id)
+    );
+    create table genero_video(
+    cod_genero integer not null,
+    cod_video integer not null,
+    constraint genero_video_pk primary key (cod_genero,cod_video),
+    constraint genero_video_genero_fk foreign key (cod_genero) references genero (id),
+    constraint genero_video_video_fk foreign key (cod_video) references video (id)
+    );
+
+    create table usuario(
+    id serial,
+    nome text not null,
+    email text not null,
+    senha text not null,
+    constraint usuario_pk primary key (id)
+    );
+
+    create table pontuacao(
+    cod_usuario integer not null,
+    cod_video integer not null,
+    constraint pontuacao_pk primary key (cod_usuario,cod_video),
+    constraint pontuacao_usuario_fk foreign key (cod_usuario) references usuario (id),
+    constraint pontuacao_video_fk foreign key (cod_video) references video (id),
+    pontuacao integer not null
+    );
+
+
+    insert into genero (genero) values ('Ação');
+    insert into genero (genero) values ('Aventura');
+    insert into genero (genero) values ('Comédia');
+    insert into genero (genero) values ('Dança');
+    insert into genero (genero) values ('Documentário');
+    insert into genero (genero) values ('Drama');
+    insert into genero (genero) values ('Espionagem');
+    insert into genero (genero) values ('Faroeste');
+    insert into genero (genero) values ('Fantasia');
+    insert into genero (genero) values ('Ficção científica');
+    insert into genero (genero) values ('Filmes de guerra');
+    insert into genero (genero) values ('Musical');
+    insert into genero (genero) values ('Filme policial');
+    insert into genero (genero) values ('Romance');
+    insert into genero (genero) values ('Animação');
+
+
+    insert into video (capa,nome,duracao,lingua,sinopse,url) values ('vingadoresGuerraInfinita.jpg', 'Vingadores: Guerra Infinita ','2h36min', 'ingles','Thanos (Josh Brolin) enfim chega à Terra, disposto a reunir as Joias do Infinito. Para enfrentá-lo, os Vingadores precisam unir forças com os Guardiões da Galáxia, ao mesmo tempo em que lidam com desavenças entre alguns de seus integrantes.', 'https://www.youtube.com/embed/3BXq73F2_z4');
+
+    insert into video (capa,nome,duracao,lingua,sinopse,url) values ('vingadoresUltimato.jpg', 'Vingadores: Ultimato','3h1min', 'ingles','Após Thanos eliminar metade das criaturas vivas, os Vingadores precisam lidar com a dor da perda de amigos e seus entes queridos. Com Tony Stark (Robert Downey Jr.) vagando perdido no espaço sem água nem comida, Steve Rogers (Chris Evans) e Natasha Romanov (Scarlett Johansson) precisam liderar a resistência contra o titã louco.', 'https://www.youtube.com/embed/PgrmbRID0eY');
+    
+    insert into video (capa,nome,duracao,lingua,sinopse,url) values ('asBranquelas.jpg', 'As Branquelas','1h 49min', 'ingles','Os irmãos Marcus (Marlon Wayans) e Kevin Copeland (Shawn Wayans) são detetives do FBI que estão com problemas no trabalho. A última investigação da dupla foi um grande fracasso e eles estão sob a ameaça de serem demitidos. Quando um plano para sequestrar as mimadas irmãs Brittany (Maitland Ward) e Tiffany Wilson (Anne Dudek) é descoberto, o caso é entregue aos principais rivais dos irmãos Copeland, os agentes Vincent Gomez (Eddie Velez) e Jack Harper (Lochlyn Munro). Para aumentar ainda mais a humilhação da dupla, eles são escalados para escoltar as jovens mimadas do aeroporto até o local de um evento pelo qual elas esperaram por meses. Porém no trajeto um acidente de carro provoca um verdadeiro desastre: enquanto uma das irmãs arranha o nariz, a outra corta o lábio. Desesperadas, elas se recusam a ir ao evento. É quando,para salvar o emprego, Marcus e Kevin decidem por assumir as identidades das irmãs.', 'https://www.youtube.com/embed/JbnPlw2cup4');
+    insert into  genero_video values (1,1),(1,2),(2,1),(2,2),(3,3),(7,3),(13,3);
+    
+    insert into video (capa,nome,duracao,lingua,sinopse,url) values ('oResgateDoSoldadoRyan.jpg','O Resgate do Soldado Ryan','2h 43min','ingles','Ao desembarcar na Normandia, no dia 6 de junho de 1944, capitão Miller (Tom Hanks) recebe a missão de comandar um grupo do segundo batalhão para o resgate do soldado James Ryan, caçula de quatro irmãos, dentre os quais três morreram em combate. Por ordens do chefe George C. Marshall, eles precisam procurar o soldado e garantir o seu retorno, com vida, para casa.','https://www.youtube.com/embed/WdHJ_nLRjIA')
+insert into  genero_video values (6,4),(11,4);
+
+insert into video (id,capa,nome,duracao,lingua,sinopse,url) values (5,'malevolaADonaDoMal.jpg','Malévola - Dona do Mal','1h 59min','inglês','Cinco anos após Aurora (Elle Fanning) despertar do sono profundo, a agora rainha dos Moors é pedida em casamento pelo príncipe Phillip (Harris Dickinson). Ela aceita o pedido e, com isso, parte rumo ao reino de Ulstead ao lado de Malévola (Angelina Jolie), no intuito de conhecer seus futuros sogros, John (Robert Lindsay) e Ingrith (Michelle Pfeiffer). O jantar entre eles deveria ser de celebração entre os reinos, mas os interesses de Ingrith vêm à tona quando é criado um atrito com Malévola e os demais seres mágicos.', 'https://www.youtube.com/embed/EQvOkjxsO0k'), (6,'umaSegundaChanceParaAmar.jpg','Uma Segunda Chance Para Amar','1h 43min','inglês','Kate (Emilia Clarke) é uma jovem inglesa cuja vida é uma bagunça. Ela trabalha como elfo em uma loja temática de natal o ano todo. Quando ela conhece Tom (Henry Golding), o que parecia impossível se torna realidade, conforme o rapaz enxerga através de todas as barreiras que ela construiu.','https://www.youtube.com/embed/6ABmXDV7y-w'),(7,'aFamiliaAddams.jpg','A Família Addams','1h 27min','inglês','Para ir de mal a pior, a Família Addams precisa se preparar para receber uma visita de parentes ainda mais arrepiantes. Mas a misteriosa mansão deles parece estar com os dias de maldade contados. O clã assustador mais querido dos cinemas está de volta nessa animação baseada nos quadrinhos de Charles Addams.','https://www.youtube.com/embed/3AM6A04zcAg');
+
+insert into genero_video values (2,5),(3,6),(14,6),(15,7);
+
+insert into genero_video values (9,5);
+
+insert into video (id,capa,nome,duracao,lingua,sinopse,url) values (8,'doraEACidadePerdida.jpg', 'Dora e a Cidade Perdida ',
+'1h 43min', 'ingles','Ambientado na floresta peruana, o filme narra as aventuras de Dora (Isabella Merced) junto de seu macaco Botas, amigos que acabou de fazer na escola e um misterioso explorador a fim de salvar seus pais de mercenários. Mas Dora também terá de solucionar um grande mistério envolvendo Parapata, uma antiga cidade perdida dos Incas.',
+'https://www.youtube.com/embed/cQRFAv2mxEU');
+
+insert into video (id,capa,nome,duracao,lingua,sinopse,url) values (9,'osParcas.jpg', 'Os Parças',
+'1h 40min', 'português','Chantageados e enganados por um ambicioso trambiqueiro (Oscar Magrini), Toinho (Tom Cavalcante), Ray Van (Whindersson Nunes), Pilôra (Tirullipa) e Romeu (Bruno de Luca) precisam organizar uma festa inesquecível de casamento sem nenhum dinheiro no bolso. Caso falhem, terão que lidar com o maior contrabandista da famosa rua 25 de Março em São Paulo, que é também o pai da noiva (Paloma Bernardi).',
+'https://www.youtube.com/embed/FUlEV4tzzQ8');
+
+insert into video (id,capa,nome,duracao,lingua,sinopse,url) values (10,'coringa.jpg', 'Coringa',
+'2h 02min', 'inglês','Arthur Fleck (Joaquin Phoenix) trabalha como palhaço para uma agência de talentos e, toda semana, precisa comparecer a uma agente social, devido aos seus conhecidos problemas mentais. Após ser demitido, Fleck reage mal à gozação de três homens em pleno metrô e os mata. Os assassinatos iniciam um movimento popular contra a elite de Gotham City, da qual Thomas Wayne (Brett Cullen) é seu maior representante.',
+'https://www.youtube.com/embed/jfVTJm9NilA');
+
+
+
+insert into video (id,capa,nome,duracao,lingua,sinopse,url) values (11,'asPanteras.jpg', 'As Panteras',
+'1h 59min', 'inglês','Sabina Wilson (Kristen Stewart) e Jane Kano (Ella Balinska) são duas Panteras que precisam deixar as diferenças de lado quando embarcam em uma aventura internacional junto à nova Bosley (Elizabeth Banks) e com a cientista Elena Houghlin (Naomi Scott). Elas precisam impedir que um novo programa de energia se torne uma ameaça para a humanidade e descobrir quem está por trás de um plano tão maligno.',
+'https://www.youtube.com/embed/3jZY1m-csRE');
+
+insert into video (id,capa,nome,duracao,lingua,sinopse,url) values (12,'invasaoAoServicoSecreto.jpg', 'Invasão Ao Serviço Secreto',
+'2h 01min', 'inglês','Dedicado e sempre focado em seu trabalho, o agente do Serviço Secreto, Mike Banning (Gerard Butler) vê sua vida mudar completamente da noite para o dia ao ser acusado de conspirar para o assassinato do presidente dos Estados Unidos. Quando percebe que todos estão atrás dele, Mike corre contra o tempo para descobrir o que realmente aconteceu enquanto foge de outros agentes.',
+'https://www.youtube.com/embed/MewNCnQ0PC0');
+
+insert into genero_video values 
+(1,12),(1,11),(3,11), (6,10),(3,9),(2,8), (7,11)
+
+insert into video (id,capa,nome,duracao,lingua,sinopse,url) values (13,'oJogoDaImitacao.jpg', 'O jogo da imitação',
+'1h 55min', 'inglês','Durante a Segunda Guerra Mundial, o governo britânico monta uma equipe que tem por objetivo quebrar o Enigma, o famoso código que os alemães usam para enviar mensagens aos submarinos. Um de seus integrantes é Alan Turing (Benedict Cumberbatch), um matemático de 27 anos estritamente lógico e focado no trabalho, que tem problemas de relacionamento com praticamente todos à sua volta. Não demora muito para que Turing, apesar de sua intransigência, lidere a equipe. Seu grande projeto é construir uma máquina que permita analisar todas as possibilidades de codificação do Enigma em apenas 18 horas, de forma que os ingleses conheçam as ordens enviadas antes que elas sejam executadas. Entretanto, para que o projeto dê certo, Turing terá que aprender a trabalhar em equipe e tem Joan Clarke (Keira Knightley) sua grande incentivadora.',
+'https://www.youtube.com/embed/YIkKbMcJL_4');
+
+insert into video (id,capa,nome,duracao,lingua,sinopse,url) values (14,'aMeninaQueRoubavaLivros.jpg', 'A Menina  Que Roubava Livros',
+'2h 11min', 'inglês','Durante a Segunda Guerra Mundial, uma jovem garota chamada Liesel Meminger (Sophie Nélisse) sobrevive fora de Munique através dos livros que ela rouba. Ajudada por seu pai adotivo (Geoffrey Rush), ela aprende a ler e partilhar livros com seus amigos, incluindo um homem judeu (Ben Schnetzer) que vive na clandestinidade em sua casa. Enquanto não está lendo ou estudando, ela realiza algumas tarefas para a mãe (Emily Watson) e brinca com a amigo Rudy (Nico Liersch).',
+'https://www.youtube.com/embed/J24AlOYHpVU');
+
+
+insert into video (id,capa,nome,duracao,lingua,sinopse,url) values (15,'oMeninoDoPijamaListrado.jpg', 'O Menino do Pijama Listrado',
+'1h 30min', 'inglês','Alemanha, Segunda Guerra Mundial. O menino Bruno (Asa Butterfield), de 8 anos, é filho de um oficial nazista (David Tewlis) que assume um cargo importante em um campo de concentração. Sem saber realmente o que seu pai faz, ele deixa Berlim e se muda com ele e a mãe (Vera Farmiga) para uma área isolada, onde não há muito o que fazer para uma criança com a idade dele. Os problemas começam quando ele decide explorar o local e acaba conhecendo Shmuel (Jack Scanlon), um garoto de idade parecida, que vive usando um pijama listrado e está sempre do outro lado de uma cerca eletrificada. A amizade cresce entre os dois e Bruno passa, cada vez mais, a visitá-lo, tornando essa relação mais perigosa do que eles imaginam.',
+'https://www.youtube.com/embed/aqwTw9qX1k4');
+
+insert into video (id,capa,nome,duracao,lingua,sinopse,url) values (16,'bastardosInglorios.jpg', 'Bastardos Inglórios',
+'2h 33min', 'inglês','2ª Guerra Mundial. A França está ocupada pelos nazistas. O tenente Aldo Raine (Brad Pitt) é o encarregado de reunir um pelotão de soldados de origem judaica, com o objetivo de realizar uma missão suicida contra os alemães. O objetivo é matar o maior número possível de nazistas, da forma mais cruel possível. Paralelamente Shosanna Dreyfuss (Mélanie Laurent) assiste a execução de sua família pelas mãos do coronel Hans Landa (Christoph Waltz), o que faz com que fuja para Paris. Lá ela se disfarça como operadora e dona de um cinema local, enquanto planeja um meio de se vingar.',
+'https://www.youtube.com/embed/w1O5LThfp7w');
+
+
+insert into genero_video values (6,13),(11,13),(11,14),(11,15),(11,16),(6,14),(6,15),(1,16)
